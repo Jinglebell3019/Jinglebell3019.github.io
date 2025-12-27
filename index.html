@@ -1,23 +1,367 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Jinglebell3019 | Cyber Security Student</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jinglebell3019 | Cybersecurity Analyst</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: monospace; background-color: #0d1117; color: #c9d1d9; text-align: center; padding: 50px; }
-        h1 { color: #58a6ff; }
-        .box { border: 1px solid #30363d; padding: 20px; max-width: 600px; margin: 0 auto; border-radius: 6px; }
-        a { color: #58a6ff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        /* --- 1. CORE VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0a192f;
+            --light-navy: #112240;
+            --lightest-navy: #233554;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --accent: #64ffda; /* The "Cyber" Green */
+            --white: #e6f1ff;
+            --font-main: 'Calibre', 'Inter', 'San Francisco', sans-serif;
+            --font-mono: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- 2. UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-right: 20px;
+        }
+
+        .section-line {
+            height: 1px;
+            background-color: var(--lightest-navy);
+            width: 300px;
+            max-width: 100%;
+        }
+
+        /* --- 3. NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background-color: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 1.5rem;
+            border: 2px solid var(--accent);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+        .nav-number { color: var(--accent); margin-right: 5px; }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 0;
+        }
+
+        .hero h1 {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .hero h2 {
+            font-size: 80px;
+            color: var(--white);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .hero h3 {
+            font-size: 60px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 540px;
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+        }
+
+        .btn {
+            color: var(--accent);
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            padding: 1.25rem 1.75rem;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        /* --- 5. ABOUT SECTION --- */
+        section { padding: 100px 0; }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+        }
+
+        .about-text p { margin-bottom: 15px; color: var(--text-secondary); }
+        
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+
+        .skills-list li::before {
+            content: "▹";
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .stat-cards {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: var(--light-navy);
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-card h3 { color: var(--accent); font-size: 2rem; }
+        .stat-card span { font-family: var(--font-mono); font-size: 12px; }
+
+        /* --- 6. PROJECTS SECTION --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background-color: var(--light-navy);
+            padding: 2rem;
+            border-radius: 4px;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .project-card:hover { transform: translateY(-7px); }
+
+        .folder-icon { color: var(--accent); font-size: 40px; margin-bottom: 20px; }
+        
+        .project-card h3 { 
+            color: var(--white); 
+            margin-bottom: 10px; 
+            font-size: 22px; 
+        }
+
+        .project-card p { color: var(--text-secondary); font-size: 15px; margin-bottom: 20px;}
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: auto;
+        }
+
+        /* --- 7. CONTACT SECTION --- */
+        .contact-section { text-align: center; max-width: 600px; margin: 0 auto; }
+        .contact-section h2 { font-size: 50px; color: var(--white); margin-bottom: 20px; }
+        .contact-section p { color: var(--text-secondary); margin-bottom: 50px; font-size: 18px; }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 50px; }
+            .hero h3 { font-size: 40px; }
+            .about-content { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified for mobile */
+            .container { padding: 0 25px; }
+        }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>Hello, I'm Jinglebell3019</h1>
-        <p>Cybersecurity Student & Aspiring SOC Analyst</p>
-        <hr style="border-color: #30363d;">
-        <p>My portfolio is currently under construction.</p>
-        <p>Check out my projects on GitHub:</p>
-        <h3><a href="https://github.com/Jinglebell3019">View My GitHub Profile</a></h3>
-    </div>
+
+    <nav>
+        <a href="#" class="logo">JB</a>
+        <div class="nav-links">
+            <a href="#about"><span class="nav-number">01.</span>About</a>
+            <a href="#projects"><span class="nav-number">02.</span>Projects</a>
+            <a href="#skills"><span class="nav-number">03.</span>Skills</a>
+            <a href="#contact"><span class="nav-number">04.</span>Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero container">
+        <h1>Hi, my name is</h1>
+        <h2>Jinglebell3019.</h2>
+        <h3>I defend networks & analyze data.</h3>
+        <p>
+            I am a Cybersecurity Student and aspiring SOC Analyst specializing in threat detection, network defense, and vulnerability assessment. I build secure systems and hunt down digital threats.
+        </p>
+        <a href="#projects" class="btn">Check out my work!</a>
+    </section>
+
+    <section id="about" class="container">
+        <div class="section-header">
+            <span class="section-number">01.</span>
+            <h2 class="section-title">About Me</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="about-content">
+            <div class="about-text">
+                <p>Hello! My journey into <strong>Cybersecurity</strong> began with a curiosity about how systems break and how to fix them. My main focus these days is building accessible, inclusive security solutions and learning <strong>SOC operations</strong>.</p>
+                <p>Here are a few technologies I've been working with recently:</p>
+                <ul class="skills-list">
+                    <li>Python & Bash</li>
+                    <li>Wireshark</li>
+                    <li>Splunk</li>
+                    <li>Kali Linux</li>
+                    <li>Nmap</li>
+                    <li>Burp Suite</li>
+                </ul>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <h3>Security</h3>
+                        <span>First Mindset</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Analyst</h3>
+                        <span>Detail Oriented</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <div class="section-header">
+            <span class="section-number">02.</span>
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="folder-icon"><i class="far fa-folder"></i></div>
+                <h3>Network Traffic Analysis</h3>
+                <p>Analyzed 50GB of packet data using Wireshark to identify malicious signatures and map out an attack vector.</p>
+                <div class="project-tech">
+                    <span>Wireshark</span>
+                    <span>TCP/IP</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="folder-icon"><i class="far fa-folder"></i></div>
+                <h3>Python Keylogger</h3>
+                <p>A safe, educational Keylogger built in Python to understand how malware captures keystrokes and how to detect it.</p>
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>pynput</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="folder-icon"><i class="far fa-folder"></i></div>
+                <h3>Home Lab Setup</h3>
+                <p>Built a virtualized Active Directory environment to practice penetration testing and blue team defense strategies.</p>
+                <div class="project-tech">
+                    <span>VirtualBox</span>
+                    <span>Active Directory</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="contact-section">
+            <span class="section-number" style="display:block; margin-bottom:20px;">04. What's Next?</span>
+            <h2>Get In Touch</h2>
+            <p>I am currently looking for new opportunities as a SOC Analyst. Whether you have a question or just want to say hi, my inbox is always open!</p>
+            <a href="mailto:your-email@example.com" class="btn">Say Hello</a>
+            
+            <div style="margin-top: 50px;">
+                <a href="https://github.com/Jinglebell3019" style="color:var(--text-secondary); font-size: 24px;"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
